@@ -1,5 +1,5 @@
 package org.example;	
- 
+import java.util.HashMap;
 import java.util.ArrayList; 
 import java.util.List; 
 import java.util.Scanner;
@@ -13,29 +13,29 @@ public class Main{
               databaseInitializer.initializeDatabase();
  
  	          MyUserManager userManager = new MyUserManager();	
+
+               
+              HashMap <String, MyUserAction> actionMap = new HashMap<>();
+              actionMap.put("register", new MyUserRegisterAction());
+              actionMap.put("login", new MyUserLoginAction());
+
+             Scanner scanner = new Scanner(System.in);
+ 	         String userInput;
+
+              //DriverManager.getConnection(DB_URL)
+
  
-              Scanner scanner = new Scanner(System.in);
- 
-              List<MyAction> actionList = new ArrayList<MyAction>();
-              
-              MyHelpAction help = new MyHelpAction(scanner); 
-              actionList.add(help);
-              
-              MyAboutAction about = new MyAboutAction(scanner);
- 	          actionList.add(about);	
- 
- 	          MyUserRegisterAction userRegister = new MyUserRegisterAction(scanner,userManager);	
- 	          actionList.add(userReqister);	
- 
- 	          MyUserLoginAction userLogin = new MyUserLoginAction(scanner,userManager):	
- 	          actionList.add(userLogin);	
- 
- 	         String userInput = "";	
- 
- 	         while (true) {	
- 	             System.out.println(x:"请输入你的指令，exit退出");	
-                 System.out.print(s:"你当前在第一级目录下>"); 
+             while (true) {	
+ 	             System.out.println("请输入你的指令，exit退出");	
                  userInput = scanner.nextLine();
- 
- 
- 	             if (userInput.equals(an0bject:"exit")){
+                 if (actionMap.containsKey(userInput)) {
+                    actionMap.get(userInput).action();
+                } else if (userInput.equals( "exit")){
+                    break;
+                 }else{
+                    System.out.println("未知操作");
+                }
+ 	             
+    }
+    }
+}

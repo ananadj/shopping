@@ -2,22 +2,22 @@ package org.example;
 
 import java.util.Scanner;
 
-public class MyUserLoginAction {
-    private Scanner scanner;
-    private MyUserManager userManager;
+public class MyUserLoginAction implements MyUserAction {
+    String username ,password;
+    Scanner scanner = new Scanner(System.in);
 
-    public MyUserLoginAction(Scanner scanner, MyUserManager userManager) {
-        this.scanner = scanner;
-        this.userManager = userManager;
-    }
+    MyUserManager userManager=new MyUserManager();
 
-    public void loginUser() {
+    public MyUserLoginAction()
+    {}
+
+    public void action() {
         System.out.println("现在你在用户登录子菜单里.");
         while (true) {
             System.out.print("请输入用户名:");
-            String username = this.scanner.nextLine();
+            String username = scanner.nextLine();
             System.out.print("请输入密码:");
-            String password = this.scanner.nextLine();
+            String password = scanner.nextLine();
             boolean success = this.userManager.loginUser(username, password);
             if (success) {
                 System.out.println("用户登录成功！");
