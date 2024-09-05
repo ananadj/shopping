@@ -7,8 +7,7 @@ import java.util.Scanner;
 public class Main{	
     
     public static void main(String[] args) {
-              System.out.println("Hello world!");
- 	
+               
               DatabaseInitializer databaseInitializer = new DatabaseInitializer();	
               databaseInitializer.initializeDatabase();
  
@@ -18,6 +17,11 @@ public class Main{
               HashMap <String, MyUserAction> actionMap = new HashMap<>();
               actionMap.put("register", new MyUserRegisterAction());
               actionMap.put("login", new MyUserLoginAction());
+              actionMap.put("adminLogin", new MyAdminLoginAction());
+              actionMap.put("adminPassword", new MyAdminPasswordAction());
+              actionMap.put("adminResetPassword", new MyAdminResetPasswordAction()); 
+              actionMap.put("adminListCustomers", new MyAdminListCustomersAction());
+              actionMap.put("addUser", new MyUserAddAction());
 
              Scanner scanner = new Scanner(System.in);
  	         String userInput;
