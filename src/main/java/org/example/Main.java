@@ -22,6 +22,8 @@ public class Main{
               actionMap.put("adminResetPassword", new MyAdminResetPasswordAction()); 
               actionMap.put("adminListCustomers", new MyAdminListCustomersAction());
               actionMap.put("addUser", new MyUserAddAction());
+              actionMap.put("addProduct", new MyProductAddAction());
+              actionMap.put("updateProduct", new MyProductUpdateAction());
 
              Scanner scanner = new Scanner(System.in);
  	         String userInput;
