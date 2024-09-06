@@ -24,6 +24,10 @@ public class Main{
               actionMap.put("addUser", new MyUserAddAction());
               actionMap.put("addProduct", new MyProductAddAction());
               actionMap.put("updateProduct", new MyProductUpdateAction());
+              actionMap.put("listProduct", new MyProductListAction());
+              actionMap.put("deleteProduct", new MyProductDeleteAction());
+              actionMap.put("searchProduct", new MyProductSearchAction());
+
 
              Scanner scanner = new Scanner(System.in);
  	         String userInput;
