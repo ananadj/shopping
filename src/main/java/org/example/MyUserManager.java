@@ -85,7 +85,7 @@ public class MyUserManager {
         return customers;
     }
     
-    public boolean addUser(String username, String user_level, String phone, String email) {
+    public boolean addUser(int id,String username, String userLevel, String phone, String email) {
         try (Connection connection = DriverManager.getConnection(DB_URL)) {
             // 检查用户是否存在
             try (PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Users WHERE username = ?")) {
@@ -94,10 +94,12 @@ public class MyUserManager {
                 if (resultSet.next()) {
                     // 用户存在，更新用户信息
                     try (PreparedStatement updateStatement = connection.prepareStatement(
-                            "UPDATE Users SET userLevel = ?, phone = ?, email = ? WHERE username = ?")) {
-                        updateStatement.setString(1, user_level);
-                        updateStatement.setString(2, phone);
-                        updateStatement.setString(3, email);
+                            "UPDATE Users SET id = ?, userLevel = ?, phone = ?, email = ? WHERE username = ?")) {
+                        updateStatement.setInt(1, id);
+                        updateStatement.setString(2, userLevel);
+                        updateStatement.setString(3, phone);
+                        updateStatement.setString(4, email);
+                        updateStatement.setString(5, username);
                         int affectedRows = updateStatement.executeUpdate();
                         return affectedRows > 0;
                     }
