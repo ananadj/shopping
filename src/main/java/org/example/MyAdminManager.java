@@ -39,10 +39,56 @@ public class MyAdminManager {
         return userManager.resetUserPassword(username, newPassword);
     }
 
-    public List<CustomerInfo> adminListAllCustomers(MyUserManager userManager) {
-        return userManager.listAllCustomers();
+
+    public List<String> listAllUsers() {
+        List<String> usersInfo = new ArrayList<>();
+        String selectQuery = "SELECT id, username, userLevel, phone, email FROM Users";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:users.db");
+             PreparedStatement statement = connection.prepareStatement(selectQuery);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String info = "ID: " + resultSet.getInt("id") +
+                               ", Username: " + resultSet.getString("username") +
+                               ", User Level: " + resultSet.getString("userLevel") +
+                               ", Phone: " + resultSet.getString("phone") +
+                               ", Email: " + resultSet.getString("email");
+                usersInfo.add(info);
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to list customers: " + e.getMessage());
+        }
+        return usersInfo;
     }
-}
+
+    public String findUserByUsername(String username) {
+        String selectQuery = "SELECT id, username, userLevel, phone, email FROM Users WHERE username = ?";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:users.db");
+             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+            statement.setString(1, username);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String info = "ID: " + resultSet.getInt("id") +
+                                   ", Username: " + resultSet.getString("username") +
+                                   ", User Level: " + resultSet.getString("userLevel") +
+                                   ", Phone: " + resultSet.getString("phone") +
+                                   ", Email: " + resultSet.getString("email");
+                    return info;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to find user: " + e.getMessage());
+        }
+        return "User not found";
+    }
+
+    
+    
+    }
+
+
     
 
 

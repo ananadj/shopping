@@ -20,7 +20,7 @@ public class Main{
               actionMap.put("adminLogin", new MyAdminLoginAction());
               actionMap.put("adminPassword", new MyAdminPasswordAction());
               actionMap.put("adminResetPassword", new MyAdminResetPasswordAction()); 
-              actionMap.put("adminListCustomers", new MyAdminListCustomersAction());
+              actionMap.put("adminListUser", new MyAdminListUserAction());
               actionMap.put("addUser", new MyUserAddAction());
               actionMap.put("addProduct", new MyProductAddAction());
               actionMap.put("updateProduct", new MyProductUpdateAction());

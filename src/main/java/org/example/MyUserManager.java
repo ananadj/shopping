@@ -61,29 +61,7 @@ public class MyUserManager {
         }
     }
 
-    public List<CustomerInfo> listAllCustomers() {
-        List<CustomerInfo> customers = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:users.db");
-             PreparedStatement statement = connection.prepareStatement("SELECT id, username, user_level, registration_date, total_spent, phone, email FROM Customers");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                CustomerInfo customer = new CustomerInfo(
-                        resultSet.getInt("id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("user_level"),
-                        resultSet.getTimestamp("registration_date").toString(),
-                        resultSet.getDouble("total_spent"),
-                        resultSet.getString("phone"),
-                        resultSet.getString("email")
-                );
-                customers.add(customer);
-            }
-        } catch (SQLException e) {
-            System.out.println("Failed to list customers: " + e.getMessage());
-        }
-        return customers;
-    }
+    
     
     public boolean addUser(int id,String username, String userLevel, String phone, String email) {
         try (Connection connection = DriverManager.getConnection(DB_URL)) {
