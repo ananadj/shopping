@@ -12,6 +12,17 @@ public class MyUserManager {
     private static final String DB_URL = "jdbc:sqlite:users.db";	
  
     public boolean registerUser(String username, String password){
+         // 验证用户名长度
+    if (username.length() < 5) {
+        System.out.println("用户名长度不少于5个字符。");
+        return false;
+    }
+    // 验证密码复杂度
+    if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}$")) {
+        System.out.println("密码长度必须大于8个字符，且包含大小写字母、数字和标点符号。");
+        return false;
+    }
+
         try (
             Connection connection = DriverManager.getConnection(DB_URL);
             PreparedStatement statement = connection.prepareStatement("INSERT INTO Users(username, password) VALUES (?, ?)");
@@ -28,6 +39,7 @@ public class MyUserManager {
     }
  
     public boolean loginUser(String username, String password) {
+         
         try (Connection connection = DriverManager.getConnection(DB_URL);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?")) {
             statement.setString(1, username);

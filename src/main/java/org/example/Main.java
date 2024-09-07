@@ -27,6 +27,8 @@ public class Main{
               actionMap.put("listProduct", new MyProductListAction());
               actionMap.put("deleteProduct", new MyProductDeleteAction());
               actionMap.put("searchProduct", new MyProductSearchAction());
+              actionMap.put("shopping", new MyUserShoppingAction());
+
 
 
              Scanner scanner = new Scanner(System.in);
